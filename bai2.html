@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Phương Trình Bậc 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Giai phuong trinh bac 2 </h2>
+
+    <form id="quadraticForm">
+        <label for="a">nhap a=</label>
+        <input type="number" id="a" required>
+        <br>
+
+        <label for="b">nhap b=</label>
+        <input type="number" id="b" required>
+        <br>
+
+        <label for="c">nhap c=</label>
+        <input type="number" id="c" required>
+        <br>
+
+        <button type="button" onclick="solveQuadratic()">Giải phương trình</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function solveQuadratic() {
+            // Lấy giá trị từ form
+            var a = parseFloat(document.getElementById("a").value);
+            var b = parseFloat(document.getElementById("b").value);
+            var c = parseFloat(document.getElementById("c").value);
+
+            // Kiểm tra dữ liệu nhập vào
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                alert("Vui lòng nhập đúng giá trị cho a, b, và c.");
+                return;
+            }
+
+            // Tính delta
+            var delta = b * b - 4 * a * c;
+
+            // Tính nghiệm
+            if (delta > 0) {
+                var x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                var x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                document.getElementById("result").innerHTML = "Nghiệm x1 = " + x1 + "<br>Nghiệm x2 = " + x2;
+            } else if (delta === 0) {
+                var x = -b / (2 * a);
+                document.getElementById("result").innerHTML = "Nghiệm kép x = " + x;
+            } else {
+                document.getElementById("result").innerHTML = "Phương trình không có nghiệm thực.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

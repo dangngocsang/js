@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 align="center"> Registration Form</h2>
+    <form id="registrationForm" align="center">
+        <label for="fullName">Enter Name: *</label>
+        <input type="text" id="fullName" name="fullName" required>
+        <br>
+
+        <label for="Sex"> Sex:</label>
+        <input type="radio" name="sex" id="male">
+        <label for="male">male</label>
+        <input type="radio" name="sex" id="female">
+        <label for="female">female</label>
+        <br>
+
+        <label for="email">Enter email address: </label>
+        <input type="text" id="email" name="email" required>
+        <br>
+
+        <label for="dob"> Enter birthday (MM/DD/YYYY): </label>
+        <input type="text" id="dob" name="dob" placeholder="mm/dd/yyyy" required>
+        <br>
+
+        <label for="street">Enter street address(line1): </label>
+        <input type="text" id="street" name="street" required>
+        <br>
+
+        <label for="city"> Enter city:</label>
+        <input type="text" id="city" name="city" required>
+        <br>
+
+        <label for="zipCode">Enter 5-digit Zip code: *</label>
+        <input type="text" id="zipCode" name="zipCode" maxlength="5" required>
+        <br>
+
+
+        <label for="region"> Select a region:</label>
+        <select name="province" id="province" required>
+        <option value=""> Ha Noi</option>
+        <option value="HCM"> HCM </option>
+        <option value="Hai Duong"> Hai Duong </option>
+        <option value="Thai"> Thai Binh </option>
+        </select>
+        <br>
+
+        <button type="button" onclick="clearForm()">Clear</button>
+        <button type="button" onclick="validateForm()">Finish</button>
+    </form>
+
+    <p id="errorMessage" class="error"></p>
+
+    <script>
+        function clearForm() {
+            document.getElementById("registrationForm").reset();
+            document.getElementById("errorMessage").innerHTML = "";
+        }
+
+        function validateForm() {
+            var fullName = document.getElementById("fullName").value;
+            var email = document.getElementById("email").value;
+            var dob = document.getElementById("dob").value;
+            var province = document.getElementById("province").value;
+            var zipCode = document.getElementById("zipCode").value;
+            var radio = document.querySelector("radio")[0].value;
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var dobRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d$/;
+
+            if (fullName === "" || email === "" || dob === "") {
+                document.getElementById("errorMessage").innerHTML = "All fields with * are required.";
+            } else if (!emailRegex.test(email)) {
+                document.getElementById("errorMessage").innerHTML = "Invalid email format.";
+            } else if (!dobRegex.test(dob)) {
+                document.getElementById("errorMessage").innerHTML = "Invalid date of birth format.";
+            } else {
+                // Additional validation or form submission logic can be added here
+                document.getElementById("errorMessage").innerHTML = "Form submitted successfully!";
+            }
+        }
+    </script>
+</body>
+
+</html>
